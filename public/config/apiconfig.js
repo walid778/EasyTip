@@ -1,7 +1,7 @@
 // API Configuration File
 export class ApiConfig {
     constructor() {
-        this.BASE_URL = 'easytip-production.up.railway.app';
+        this.BASE_URL = 'https://easytip-production.up.railway.app';
         this.API_KEY = '227aca8bf6731507d99c882bb645264ed9ffe07372b1e7c3f4';
     }
 
