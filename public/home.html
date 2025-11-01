@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ar">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الصفحة الرئيسية</title>
+    <link rel="stylesheet" href="/css/home.css">
+    <link rel="stylesheet" href="/css/toast.css">
+</head>
+
+<body>
+    <!-- Toast container -->
+    <div id="toast-container"></div>
+
+    <nav id="navbar">
+        <ul>
+            <!-- مجموعة اليمين - الصفحة الرئيسية ولوحة التحكم -->
+            <div class="nav-right">
+                <li><a id="home-link">الصفحة الرئيسية</a></li>
+                <li><a href="./dashboard/dashboard.html" id="dashboard-link" class="hidden-item">لوحة التحكم</a></li>
+            </div>
+
+            <!-- مجموعة اليسار - تسجيل الدخول/الخروج -->
+            <div class="nav-left">
+                <li><a id="logout-btn" class="hidden-item">تسجيل الخروج</a></li>
+                <li><a id="login-btn">تسجيل الدخول</a></li>
+            </div>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <div id="home">
+        <h1>مرحبًا بك في صفحتنا الرئيسية!</h1>
+    </div>
+
+    <!-- Login Modal (Dialog Box) -->
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" id="close-btn">&times;</span>
+
+            <!-- Login Form -->
+            <div id="login-form-container">
+                <h2>تسجيل الدخول</h2>
+                <form id="login-form">
+                    <div class="form-group">
+                        <label for="email">البريد الإلكتروني</label>
+                        <input type="email" id="email" name="email" required placeholder="أدخل بريدك الإلكتروني">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">كلمة المرور</label>
+                        <input type="password" id="password" name="password" required placeholder="أدخل كلمة المرور">
+                    </div>
+                    <button type="submit">تسجيل الدخول</button>
+                </form>
+                <div class="form-footer">
+                    <a href="#" id="forgot-password-link">نسيت كلمة المرور؟</a>
+                    <p>ليس لديك حساب؟ <a href="#" id="signup-link">إنشاء حساب جديد</a></p>
+                </div>
+            </div>
+
+            <!-- Signup Form -->
+            <div id="signup-form-container" class="hidden-item">
+                <h2>إنشاء حساب جديد</h2>
+                <form id="signup-form">
+                    <!-- Avatar Upload Section -->
+                    <div class="avatar-upload-section">
+                        <div class="avatar-preview" id="avatar-preview-container">
+                            <img id="avatar-preview" src="" alt="صورة المستخدم">
+                            <div class="avatar-placeholder">
+                                <span>+</span>
+                                <p>إضافة صورة</p>
+                            </div>
+                            <input type="file" id="avatar-input" accept="image/*">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="signup-name">الاسم الكامل</label>
+                        <input type="text" id="signup-name" name="name" required placeholder="أدخل اسمك الكامل">
+                    </div>
+
+                <div class="form-group">
+    <label for="signup-phone">رقم الهاتف</label>
+    <div class="phone-input-wrapper">
+        <input 
+            type="tel" 
+            id="signup-phone" 
+            name="phonenumber"
+            placeholder="أدخل رقم الهاتف"
+            inputmode="numeric"
+    pattern="[0-9]*"
+    maxlength="10"
+            required
+        />
+        <div class="country-code-badge">+20</div>
+    </div>
+</div>
+
+                    <div class="form-group">
+                        <label for="signup-tiktokuser">اسم المستخدم</label>
+                        <input type="text" id="signup-tiktokuser" name="tiktokuser" required
+                            placeholder="أدخل اسم المستخدم">
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-email">البريد الإلكتروني</label>
+                        <input type="email" id="signup-email" name="email" required placeholder="أدخل بريدك الإلكتروني">
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-tiktok">رابط قناة التيكتوك</label>
+                        <input type="text" id="signup-tiktok" name="tiktoklink" required
+                            placeholder="https://www.tiktok.com/example">
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-password">كلمة المرور</label>
+                        <input type="password" id="signup-password" name="password" required
+                            placeholder="أدخل كلمة المرور">
+                    </div>
+                    <div class="form-group">
+                        <label for="confirm-password">تأكيد كلمة المرور</label>
+                        <input type="password" id="confirm-password" name="confirm-password" required
+                            placeholder="أعد إدخال كلمة المرور">
+                    </div>
+                    <button type="submit">إنشاء حساب</button>
+                </form>
+                <div class="form-footer">
+                    <p>لديك حساب بالفعل؟ <a href="#" id="login-link">تسجيل الدخول</a></p>
+                </div>
+            </div>
+
+            <!-- Forgot Password Form -->
+            <div id="forgot-password-container" class="hidden-item">
+                <h2>استعادة كلمة المرور</h2>
+                <form id="forgot-password-form">
+                    <div class="form-group">
+                        <label for="reset-email">البريد الإلكتروني</label>
+                        <input type="email" id="reset-email" name="email" required placeholder="أدخل بريدك الإلكتروني">
+                    </div>
+                    <button type="submit">إرسال رابط الاستعادة</button>
+                </form>
+                <div class="form-footer">
+                    <p><a href="#" id="back-to-login">العودة لتسجيل الدخول</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+   
+    <script type="module" src="/js/pages/home.js"></script>
+
+</body>
+
+</html>

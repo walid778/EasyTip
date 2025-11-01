@@ -1,0 +1,473 @@
+/* General Styles */
+body {
+  font-family: Arial, sans-serif;
+  direction: rtl; /* Right-to-left for Arabic */
+  margin: 0;
+  padding: 0;
+}
+
+/* Navbar */
+#navbar {
+  background-color: #333;
+  overflow: hidden;
+}
+
+#navbar ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+#navbar li {
+  padding: 14px 0;
+}
+
+/* مجموعة اليسار - الصفحة الرئيسية ولوحة التحكم */
+.nav-left {
+  margin-right: auto; /* يدفع إلى اليسار في RTL */
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/* مجموعة اليمين - تسجيل الدخول/الخروج */
+.nav-right {
+  margin-left: auto; /* يدفع إلى اليمين في RTL */
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/* الصفحة الرئيسية - أقصى اليسار */
+#home-link {
+  margin-left: 20px;
+}
+
+/* لوحة التحكم - بجوار الصفحة الرئيسية */
+#dashboard-link {
+  margin-left: 10px;
+}
+
+/* تسجيل الدخول/الخروج - أقصى اليمين */
+#login-btn, #logout-btn {
+  margin-right: 20px;
+}
+
+/* إخفاء العناصر */
+.hidden-item {
+  display: none !important;
+}
+
+#navbar a {
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
+  padding: 10px 20px;
+  cursor: pointer;
+  display: block;
+  white-space: nowrap;
+  transition: all 0.3s ease;
+}
+
+#navbar a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+/* Main Section */
+#home {
+  padding: 50px;
+  text-align: center;
+}
+
+/* Modal (Dialog Box) */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  overflow: auto;
+  padding-top: 60px;
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 5% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 400px;
+  text-align: center;
+  max-width: 90%;
+}
+
+.close-btn {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close-btn:hover, .close-btn:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Form Styles */
+.form-group {
+  margin-bottom: 15px;
+}
+
+input[type="email"], input[type="password"], input[type="text"], input[type="tel"] {
+  width: 100%;
+  padding: 10px;
+  margin: 5px 0;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  font-size: 16px; /* منع التكبير في الموبايل */
+}
+
+button[type="submit"] {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  font-size: 16px;
+}
+
+button[type="submit"]:hover {
+  background-color: #45a049;
+}
+
+/* ========== MEDIA QUERIES ========== */
+
+/* للأجهزة اللوحية (Tablets) */
+@media screen and (max-width: 768px) {
+  #navbar ul {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .nav-left, .nav-right {
+    margin: 0;
+    width: 100%;
+    justify-content: center;
+  }
+  
+  #navbar li {
+    padding: 8px 0;
+    text-align: center;
+  }
+  
+  #home-link, #dashboard-link {
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+  
+  #login-btn, #logout-btn {
+    margin-right: 5px;
+    margin-left: 5px;
+  }
+  
+  #navbar a {
+    padding: 8px 15px;
+    font-size: 16px;
+  }
+  
+  #home {
+    padding: 30px 20px;
+  }
+  
+  .modal-content {
+    width: 90%;
+    margin: 10% auto;
+    padding: 15px;
+  }
+}
+
+/* للموبايلات (Mobile) */
+@media screen and (max-width: 480px) {
+  #navbar ul {
+    flex-direction: column;
+  }
+  
+  .nav-left, .nav-right {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  #navbar li {
+    padding: 5px 0;
+    width: 100%;
+  }
+  
+  #home-link, #dashboard-link, #login-btn, #logout-btn {
+    margin: 2px 0;
+  }
+  
+  #navbar a {
+    padding: 10px;
+    font-size: 14px;
+    width: 100%;
+    text-align: center;
+  }
+  
+  #home {
+    padding: 20px 10px;
+  }
+  
+  #home h1 {
+    font-size: 24px;
+  }
+  
+  .modal-content {
+    width: 95%;
+    margin: 5% auto;
+    padding: 10px;
+  }
+  
+  .form-group {
+    margin-bottom: 10px;
+  }
+  
+  input[type="email"], input[type="password"], input[type="text"], input[type="tel"] {
+    padding: 8px;
+    font-size: 14px;
+  }
+  
+  button[type="submit"] {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+  
+  .toast {
+    padding: 8px 15px;
+    font-size: 13px;
+  }
+}
+
+/* للشاشات الكبيرة جداً */
+@media screen and (min-width: 1200px) {
+  #navbar ul {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  #home {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+}
+
+/* تحسينات للأجهزة التي تستخدم اللمس */
+@media (hover: none) and (pointer: coarse) {
+  #navbar a {
+    padding: 12px 20px; /* مساحة أكبر لللمس */
+  }
+  
+  button[type="submit"] {
+    padding: 12px 20px;
+  }
+}
+
+/* لشاشات عالية الدقة */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  #navbar a {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+/* إضافة هذه الأنماط إلى ملف CSS الحالي */
+
+/* تنسيقات إضافية للنماذج */
+/* إضافة هذه الأنماط إلى ملف CSS الحالي */
+
+/* تنسيقات إضافية للنماذج */
+.form-footer {
+  margin-top: 15px;
+  text-align: center;
+  font-size: 14px;
+}
+
+.form-footer a {
+  color: #4CAF50;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.form-footer a:hover {
+  text-decoration: underline;
+}
+
+.form-footer p {
+  margin: 8px 0;
+}
+
+/* تنسيقات خاصة لنموذج إنشاء الحساب */
+#signup-form-container,
+#forgot-password-container {
+  transition: opacity 0.3s ease;
+}
+
+/* Avatar Upload Styles */
+.avatar-upload-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 15px;
+}
+
+.avatar-preview {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-bottom: 15px;
+  border: 3px dashed #4CAF50;
+  background-color: #f9f9f9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.avatar-preview:hover {
+  border-color: #45a049;
+  background-color: #f0f0f0;
+  transform: scale(1.05);
+}
+
+.avatar-preview input[type="file"] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.avatar-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: none;
+}
+
+.avatar-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  color: #4CAF50;
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  padding: 10px;
+}
+
+.avatar-placeholder span {
+  font-size: 36px;
+  margin-bottom: 5px;
+}
+
+.avatar-placeholder p {
+  margin: 0;
+  font-size: 14px;
+  font-weight: normal;
+}
+
+.avatar-preview.has-image .avatar-placeholder {
+  display: none;
+}
+
+.avatar-preview.has-image img {
+  display: block;
+}
+
+.avatar-preview.has-image {
+  border: 3px solid #4CAF50;
+}
+
+.avatar-preview.has-image:hover::after {
+  content: "تغيير الصورة";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: normal;
+}
+
+/* تحسينات للأجهزة المحمولة */
+@media screen and (max-width: 480px) {
+  .form-footer {
+    font-size: 13px;
+  }
+  
+  .avatar-preview {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .avatar-placeholder span {
+    font-size: 28px;
+  }
+  
+  .avatar-placeholder p {
+    font-size: 12px;
+  }
+}
+
+/* تحسينات للأجهزة المحمولة */
+@media screen and (max-width: 480px) {
+  .form-footer {
+    font-size: 13px;
+  }
+}
+
+/* تنسيق كود الدولة على الشمال */
+.phone-input-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.country-code-badge {
+  position: absolute;
+  left: 10px; /* تغيير من right إلى left */
+  top: 50%;
+  transform: translateY(-50%);
+  background: #4CAF50;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: bold;
+  z-index: 2;
+}
+
+.phone-input-wrapper input {
+  padding-left: 70px; /* تغيير من padding-right إلى padding-left */
+  width: 100%;
+  box-sizing: border-box;
+}

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>جاري المعالجة</title>
+    <style>
+        body { 
+            font-family: 'Arial', sans-serif; 
+            text-align: center; 
+            padding: 50px; 
+            background: linear-gradient(135deg, #fff8f0 0%, #fff0e8 100%);
+            margin: 0;
+        }
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+        .pending { 
+            color: #ffc107; 
+            font-size: 28px; 
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        .icon {
+            font-size: 64px;
+            margin-bottom: 20px;
+            animation: pulse 1.5s infinite;
+        }
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+        .donation-id {
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-family: monospace;
+            font-size: 18px;
+        }
+        .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #ffd93d 0%, #ff9a3d 100%);
+            color: white;
+            padding: 12px 24px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="icon">⏳</div>
+        <div class="pending">جاري معالجة الدفع</div>
+        <p>عملية الدفع قيد المعالجة حالياً</p>
+        
+        <div class="donation-id" id="donationNumber">
+            جاري تحميل رقم العملية...
+        </div>
+        
+        <p>سيتم تحديث الحالة تلقائياً خلال دقائق</p>
+        <a href="/" class="btn">العودة للصفحة الرئيسية</a>
+    </div>
+
+    <script>
+        function getDonationId() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get('donation');
+        }
+
+        function displayDonationInfo() {
+            const donationId = getDonationId();
+            const donationElement = document.getElementById('donationNumber');
+            
+            if (donationId) {
+                donationElement.textContent = `رقم العملية: #${donationId}`;
+            } else {
+                donationElement.textContent = 'رقم العملية: غير متوفر';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', displayDonationInfo);
+    </script>
+</body>
+</html>

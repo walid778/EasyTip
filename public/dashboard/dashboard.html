@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>لوحة التحكم | Dashboard</title>
+  <link rel="stylesheet" href="dashboard.css" />
+      <link rel="stylesheet" href="../css/toast.css">
+      <script type="module" src="../js/dialog/dialog.js"></script>
+</head>
+
+<body data-theme="dark">
+    <!-- Mobile Menu Button -->
+  <button class="mobile-menu-btn" aria-label="Open menu">☰</button>
+
+  <!-- Sidebar Overlay for Mobile -->
+  <div class="sidebar-overlay"></div>
+  <!-- Theme Toggle -->
+  <button id="themeToggle" class="theme-toggle" aria-label="تغيير الثيم">
+    <span class="sun">☀️</span>
+    <span class="moon">🌙</span>
+  </button>
+
+  <!-- Toast -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <h2>🎛 Dashboard</h2>
+    </div>
+    <ul class="menu">
+      <li><a href="#" class="active" data-section="home">🏠 الرئيسية</a></li>
+      <li><a href="#" data-section="amounts">💰 أموالي</a></li>
+      <li><a href="#" data-section="alerts">🔔 التنبيهات</a></li>
+      <li><a href="#" data-section="streamer">🎬 تنبيهات البث</a></li>
+      <li><a href="#" data-section="settings">⚙️ الإعدادات</a></li>
+      <li><a href="#" id="logout">🚪 تسجيل الخروج</a></li>
+    </ul>
+  </aside>
+
+  <!-- Main Content -->
+   <main class="main-content">
+    <header>
+      <h1>مرحبًا بك، <span id="user-tiktokuser">User</span> 🎉</h1>
+      <br>
+    </header>
+
+    <!-- Sections -->
+    <section id="home" class="section active">
+      <h2>الرئيسية</h2>
+      <p>مرحبًا بك في لوحة التحكم الخاصة بك. استخدم القائمة الجانبية للتنقل بين الأقسام المختلفة.</p>
+    </section>
+
+    <section id="amounts" class="section">
+      <h2>💵 أموالي</h2>
+      <form id="amount-form">
+        <input type="number" id="amount-dollar" placeholder="المبلغ بالدولار" />
+        <input type="number" id="amount-egp" placeholder="المبلغ بالجنيه" />
+        <button type="submit">إضافة</button>
+      </form>
+
+      <div class="amount-lists">
+        <div>
+          <h3>بالدولار</h3>
+          <ul id="amounts-usd-list"></ul>
+        </div>
+        <div>
+          <h3>بالجنيه</h3>
+          <ul id="amounts-egp-list"></ul>
+        </div>
+      </div>
+
+      <button id="delete-all" class="danger-btn">🗑 حذف الكل</button>
+    </section>
+
+    <section id="alerts" class="section">
+      <h2>🎯 إعدادات الهدف</h2>
+      <form id="target-form">
+        <input type="text" id="target-title" placeholder="اسم الهدف" maxlength="50" />
+        <input type="number" id="target-amount" placeholder="المبلغ المطلوب" />
+        <button type="submit">💾 حفظ الهدف</button>
+      </form>
+    </section>
+
+    <section id="streamer" class="section">
+      <h2>🎬 تنبيهات البث</h2>
+      <p>احتفظ بهذه الصفحة مفتوحة أثناء البث لعرض التبرعات مباشرة.</p>
+      <div class="streamer-status">
+        <span id="online-status" class="online">🟢 متصل</span>
+      </div>
+      <div class="live-donations">
+        <h3>تبرعات اليوم</h3>
+        <div id="donations-container" class="donations-container">
+          <p>جاري التحميل...</p>
+        </div>
+      </div>
+    </section>
+
+   <section id="settings" class="section">
+  <h2>⚙️ الإعدادات</h2>
+
+  <!-- Profile Picture Section -->
+  <div class="profile-picture-section">
+    <h3>صورة الملف الشخصي</h3>
+    <div class="avatar-upload-section">
+      <div class="avatar-preview" id="settings-avatar-preview">
+        <img id="settings-avatar-img" src="" alt="Profile Picture">
+        <div class="avatar-placeholder">
+          <span>+</span>
+          <p>تغيير الصورة</p>
+        </div>
+        <input type="file" id="settings-avatar-input" accept="image/*">
+      </div>
+
+      <div id="avatar-actions" class="avatar-actions" style="display: none;">
+        <button id="save-avatar" class="save-btn">💾 حفظ</button>
+        <button id="discard-avatar" class="discard-btn">❌ إلغاء</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Edit Profile Section with Same Style -->
+  <div class="profile-picture-section">
+    <h3>تحرير الملف الشخصي</h3>
+    <form id="profile-form">
+      <input type="text" id="name" placeholder="الاسم" />
+      <input type="email" id="email" placeholder="البريد الإلكتروني" />
+      <input type="text" id="tiktokuser" placeholder="اسم المستخدم على TikTok" />
+      <input type="url" id="tiktoklink" placeholder="رابط حساب TikTok" />
+      <div class="phone-input-with-code">
+  <div class="country-code-display">+20</div>
+  <input 
+    type="tel" 
+    id="phonenumber" 
+    name="phonenumber"
+    placeholder="أدخل رقم الهاتف"
+    inputmode="numeric"
+    pattern="[0-9]*"
+    maxlength="10"
+  />
+</div>
+      <button type="submit" class="save-btn">💾 حفظ التغييرات</button>
+    </form>
+    <div class="danger-zone">
+      <button id="delete-account" class="danger-btn">🧨 حذف الحساب</button>
+    </div>
+  </div>
+</section>
+
+  </main>
+
+  <!-- JS -->
+  <script type="module" src="/js/auth/authFetch.js"></script>
+  <script type="module" src="dashboard.js"></script>
+</body>
+</html>
