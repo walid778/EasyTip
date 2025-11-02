@@ -139,22 +139,24 @@ const RefreshToken = async (req, res) => {
   }
 
   try {
-    const [rows] = await db.query('SELECT * FROM users WHERE refresh_token = ?', [refreshToken]);
-    if (rows.length === 0) {
-      return res.status(403).json({ message: 'Invalid refresh token' });
-    }
+    // Verify refresh token first
+    jwt.verify(refreshToken, process.env.JWT_REFRESH_SECRET, async (err, decoded) => {
+      if (err) return res.status(403).json({ message: 'Expired or invalid refresh token' });
 
-    const user = rows[0];
+      // Get the user from DB, selecting only the needed fields
+      const [rows] = await db.query(
+        'SELECT id, email, name, tiktokuser FROM users WHERE id = ? AND refresh_token = ?',
+        [decoded.id, refreshToken]
+      );
 
-    jwt.verify(refreshToken, process.env.JWT_REFRESH_SECRET, (err) => {
-      if (err) {
-        return res.status(403).json({ message: 'Expired or invalid refresh token' });
-      }
+      if (rows.length === 0) return res.status(403).json({ message: 'User not found or invalid token' });
+
+      const user = rows[0];
 
       const newAccessToken = token.generateAccessToken(user);
       const newRefreshToken = token.generateRefreshToken(user);
 
-      db.query('UPDATE users SET refresh_token = ? WHERE id = ?', [newRefreshToken, user.id]);
+      await db.query('UPDATE users SET refresh_token = ? WHERE id = ?', [newRefreshToken, user.id]);
 
       return res.json({
         status: true,
