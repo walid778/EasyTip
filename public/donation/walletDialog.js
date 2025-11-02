@@ -11,7 +11,7 @@ export function showWalletDialog() {
                 <div style="text-align: center; padding: 10px 0;">
                     <h4 style="margin-bottom: 15px; color: #04c20e; font-size: 1.1rem;">أدخل رقم المحفظة</h4>
                     <input 
-                        type="text" 
+                        type="number" 
                         id="walletInput" 
                         placeholder="أدخل رقم المحفظة هنا..." 
                         value="${savedWalletNumber}"
