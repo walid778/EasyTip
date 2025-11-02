@@ -24,8 +24,18 @@ const server = http.createServer(app);
 const serverip = process.env.SERVERIP ? process.env.SERVERIP.replace(/https?:\/\//, '') : 'localhost';
 const port = process.env.PORT || 3000;
 
+
 if (process.env.NODE_ENV === 'production') {
-  app.use(helmet());
+  app.use(helmet({
+  contentSecurityPolicy: {
+    directives: {
+      defaultSrc: ["'self'"],
+      imgSrc: ["'self'", 'data:', 'https://i.pravatar.cc', 'https://staging.fawaterk.com', 'https://your-other-image-source.com'],
+      styleSrc: ["'self'", "'unsafe-inline'"], // إذا كنت بحاجة إلى إضافة أشياء أخرى مثل CSS
+      scriptSrc: ["'self'", "'unsafe-inline'"], // إذا كنت بحاجة إلى إضافة السكربتات
+    }
+  }
+}));
 } else {
   app.use(helmet({
     crossOriginOpenerPolicy: false,
@@ -33,6 +43,18 @@ if (process.env.NODE_ENV === 'production') {
   crossOriginEmbedderPolicy: false
   }));
 }
+
+
+
+/*if (process.env.NODE_ENV === 'production') {
+  app.use(helmet());
+} else {
+  app.use(helmet({
+    crossOriginOpenerPolicy: false,
+  contentSecurityPolicy: false,
+  crossOriginEmbedderPolicy: false
+  }));
+}*/
 
 app.use(compression());
 
