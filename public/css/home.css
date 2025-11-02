@@ -1,15 +1,48 @@
-/* General Styles */
-body {
-  font-family: Arial, sans-serif;
-  direction: rtl; /* Right-to-left for Arabic */
-  margin: 0;
-  padding: 0;
+/* ==============================
+   🎨 Home Page Unified with Dashboard Dark Theme
+   ============================== */
+
+:root {
+  --primary-color: #4a90e2;
+  --secondary-color: #f5f5f5;
+  --bg-color: #ffffff;
+  --bg-secondary: #f0f0f0;
+  --bg-tertiary: #e0e0e0;
+  --text-color: #333;
+  --text-light: #fff;
+  --danger-color: #e74c3c;
+  --transition: 0.3s;
 }
 
-/* Navbar */
+[data-theme="dark"] {
+  --bg-color: #1e1e2f;
+  --bg-secondary: #2a2a3c;
+  --bg-tertiary: #33334d;
+  --text-color: #f5f5f5;
+  --text-light: #fff;
+}
+
+/* ==============================
+   🧱 General Styles
+   ============================== */
+body {
+  font-family: Arial, sans-serif;
+  direction: rtl;
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: var(--transition);
+}
+
+/* ==============================
+   🧭 Navbar
+   ============================== */
 #navbar {
-  background-color: #333;
+  background-color: var(--bg-secondary);
+  border-bottom: 2px solid var(--bg-tertiary);
   overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
 }
 
 #navbar ul {
@@ -26,271 +59,141 @@ body {
   padding: 14px 0;
 }
 
-/* مجموعة اليسار - الصفحة الرئيسية ولوحة التحكم */
 .nav-left {
-  margin-right: auto; /* يدفع إلى اليسار في RTL */
+  margin-right: auto;
   display: flex;
   flex-wrap: wrap;
 }
 
-/* مجموعة اليمين - تسجيل الدخول/الخروج */
 .nav-right {
-  margin-left: auto; /* يدفع إلى اليمين في RTL */
+  margin-left: auto;
   display: flex;
   flex-wrap: wrap;
-}
-
-/* الصفحة الرئيسية - أقصى اليسار */
-#home-link {
-  margin-left: 20px;
-}
-
-/* لوحة التحكم - بجوار الصفحة الرئيسية */
-#dashboard-link {
-  margin-left: 10px;
-}
-
-/* تسجيل الدخول/الخروج - أقصى اليمين */
-#login-btn, #logout-btn {
-  margin-right: 20px;
-}
-
-/* إخفاء العناصر */
-.hidden-item {
-  display: none !important;
 }
 
 #navbar a {
-  color: white;
+  color: var(--text-color);
   text-decoration: none;
   font-size: 18px;
   padding: 10px 20px;
   cursor: pointer;
   display: block;
   white-space: nowrap;
-  transition: all 0.3s ease;
+  border-radius: 8px;
+  transition: var(--transition);
 }
 
 #navbar a:hover {
-  background-color: #ddd;
-  color: black;
+  background-color: var(--primary-color);
+  color: var(--text-light);
 }
 
-/* Main Section */
+.hidden-item {
+  display: none !important;
+}
+
+/* ==============================
+   🏠 Main Section
+   ============================== */
 #home {
   padding: 50px;
   text-align: center;
 }
 
-/* Modal (Dialog Box) */
+#home h1 {
+  color: var(--text-color);
+}
+
+/* ==============================
+   💬 Modal (Dialog Box)
+   ============================== */
 .modal {
   display: none;
   position: fixed;
-  z-index: 1;
+  z-index: 10;
   left: 0;
   top: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0,0,0,0.6);
   overflow: auto;
   padding-top: 60px;
 }
 
 .modal-content {
-  background-color: #fefefe;
+  background-color: var(--bg-secondary);
+  color: var(--text-color);
   margin: 5% auto;
-  padding: 20px;
-  border: 1px solid #888;
+  padding: 25px;
+  border: 1px solid var(--bg-tertiary);
+  border-radius: 10px;
   width: 400px;
   text-align: center;
   max-width: 90%;
+  box-shadow: 0 5px 30px rgba(0,0,0,0.3);
 }
 
 .close-btn {
-  color: #aaa;
+  color: var(--text-color);
   float: right;
   font-size: 28px;
   font-weight: bold;
-}
-
-.close-btn:hover, .close-btn:focus {
-  color: black;
-  text-decoration: none;
   cursor: pointer;
 }
 
-/* Form Styles */
-.form-group {
-  margin-bottom: 15px;
+.close-btn:hover {
+  color: var(--primary-color);
 }
 
-input[type="email"], input[type="password"], input[type="text"], input[type="tel"] {
+/* ==============================
+   ✍️ Forms
+   ============================== */
+.form-group {
+  margin-bottom: 15px;
+  text-align: right;
+}
+
+input[type="email"],
+input[type="password"],
+input[type="text"],
+input[type="tel"] {
   width: 100%;
   padding: 10px;
   margin: 5px 0;
   box-sizing: border-box;
-  border: 1px solid #ccc;
-  font-size: 16px; /* منع التكبير في الموبايل */
+  border-radius: 6px;
+  border: 1px solid var(--bg-tertiary);
+  background-color: var(--bg-tertiary);
+  color: var(--text-color);
+  font-size: 16px;
+  transition: var(--transition);
+}
+
+input:focus {
+  outline: none;
+  border-color: var(--primary-color);
 }
 
 button[type="submit"] {
-  background-color: #4CAF50;
-  color: white;
+  background-color: var(--primary-color);
+  color: var(--text-light);
   padding: 10px 20px;
   border: none;
   cursor: pointer;
   width: 100%;
   font-size: 16px;
+  border-radius: 8px;
+  transition: var(--transition);
 }
 
 button[type="submit"]:hover {
-  background-color: #45a049;
+  opacity: 0.9;
+  transform: translateY(-2px);
 }
 
-/* ========== MEDIA QUERIES ========== */
-
-/* للأجهزة اللوحية (Tablets) */
-@media screen and (max-width: 768px) {
-  #navbar ul {
-    flex-direction: column;
-    align-items: stretch;
-  }
-  
-  .nav-left, .nav-right {
-    margin: 0;
-    width: 100%;
-    justify-content: center;
-  }
-  
-  #navbar li {
-    padding: 8px 0;
-    text-align: center;
-  }
-  
-  #home-link, #dashboard-link {
-    margin-left: 5px;
-    margin-right: 5px;
-  }
-  
-  #login-btn, #logout-btn {
-    margin-right: 5px;
-    margin-left: 5px;
-  }
-  
-  #navbar a {
-    padding: 8px 15px;
-    font-size: 16px;
-  }
-  
-  #home {
-    padding: 30px 20px;
-  }
-  
-  .modal-content {
-    width: 90%;
-    margin: 10% auto;
-    padding: 15px;
-  }
-}
-
-/* للموبايلات (Mobile) */
-@media screen and (max-width: 480px) {
-  #navbar ul {
-    flex-direction: column;
-  }
-  
-  .nav-left, .nav-right {
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  #navbar li {
-    padding: 5px 0;
-    width: 100%;
-  }
-  
-  #home-link, #dashboard-link, #login-btn, #logout-btn {
-    margin: 2px 0;
-  }
-  
-  #navbar a {
-    padding: 10px;
-    font-size: 14px;
-    width: 100%;
-    text-align: center;
-  }
-  
-  #home {
-    padding: 20px 10px;
-  }
-  
-  #home h1 {
-    font-size: 24px;
-  }
-  
-  .modal-content {
-    width: 95%;
-    margin: 5% auto;
-    padding: 10px;
-  }
-  
-  .form-group {
-    margin-bottom: 10px;
-  }
-  
-  input[type="email"], input[type="password"], input[type="text"], input[type="tel"] {
-    padding: 8px;
-    font-size: 14px;
-  }
-  
-  button[type="submit"] {
-    padding: 8px 16px;
-    font-size: 14px;
-  }
-  
-  .toast {
-    padding: 8px 15px;
-    font-size: 13px;
-  }
-}
-
-/* للشاشات الكبيرة جداً */
-@media screen and (min-width: 1200px) {
-  #navbar ul {
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-  
-  #home {
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-}
-
-/* تحسينات للأجهزة التي تستخدم اللمس */
-@media (hover: none) and (pointer: coarse) {
-  #navbar a {
-    padding: 12px 20px; /* مساحة أكبر لللمس */
-  }
-  
-  button[type="submit"] {
-    padding: 12px 20px;
-  }
-}
-
-/* لشاشات عالية الدقة */
-@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-  #navbar a {
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-}
-/* إضافة هذه الأنماط إلى ملف CSS الحالي */
-
-/* تنسيقات إضافية للنماذج */
-/* إضافة هذه الأنماط إلى ملف CSS الحالي */
-
-/* تنسيقات إضافية للنماذج */
+/* ==============================
+   📎 Form Footer Links
+   ============================== */
 .form-footer {
   margin-top: 15px;
   text-align: center;
@@ -298,7 +201,7 @@ button[type="submit"]:hover {
 }
 
 .form-footer a {
-  color: #4CAF50;
+  color: var(--primary-color);
   text-decoration: none;
   cursor: pointer;
 }
@@ -307,17 +210,9 @@ button[type="submit"]:hover {
   text-decoration: underline;
 }
 
-.form-footer p {
-  margin: 8px 0;
-}
-
-/* تنسيقات خاصة لنموذج إنشاء الحساب */
-#signup-form-container,
-#forgot-password-container {
-  transition: opacity 0.3s ease;
-}
-
-/* Avatar Upload Styles */
+/* ==============================
+   🧍‍♂️ Avatar Upload Section
+   ============================== */
 .avatar-upload-section {
   display: flex;
   flex-direction: column;
@@ -333,18 +228,18 @@ button[type="submit"]:hover {
   border-radius: 50%;
   overflow: hidden;
   margin-bottom: 15px;
-  border: 3px dashed #4CAF50;
-  background-color: #f9f9f9;
+  border: 3px dashed var(--primary-color);
+  background-color: var(--bg-tertiary);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: var(--transition);
 }
 
 .avatar-preview:hover {
-  border-color: #45a049;
-  background-color: #f0f0f0;
+  border-color: var(--secondary-color);
+  background-color: var(--bg-secondary);
   transform: scale(1.05);
 }
 
@@ -372,12 +267,10 @@ button[type="submit"]:hover {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: transparent;
-  color: #4CAF50;
+  color: var(--primary-color);
   font-size: 24px;
   font-weight: bold;
   text-align: center;
-  padding: 10px;
 }
 
 .avatar-placeholder span {
@@ -388,7 +281,6 @@ button[type="submit"]:hover {
 .avatar-placeholder p {
   margin: 0;
   font-size: 14px;
-  font-weight: normal;
 }
 
 .avatar-preview.has-image .avatar-placeholder {
@@ -400,7 +292,7 @@ button[type="submit"]:hover {
 }
 
 .avatar-preview.has-image {
-  border: 3px solid #4CAF50;
+  border: 3px solid var(--primary-color);
 }
 
 .avatar-preview.has-image:hover::after {
@@ -411,42 +303,16 @@ button[type="submit"]:hover {
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.7);
-  color: white;
+  color: var(--text-light);
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 14px;
-  font-weight: normal;
 }
 
-/* تحسينات للأجهزة المحمولة */
-@media screen and (max-width: 480px) {
-  .form-footer {
-    font-size: 13px;
-  }
-  
-  .avatar-preview {
-    width: 100px;
-    height: 100px;
-  }
-  
-  .avatar-placeholder span {
-    font-size: 28px;
-  }
-  
-  .avatar-placeholder p {
-    font-size: 12px;
-  }
-}
-
-/* تحسينات للأجهزة المحمولة */
-@media screen and (max-width: 480px) {
-  .form-footer {
-    font-size: 13px;
-  }
-}
-
-/* تنسيق كود الدولة على الشمال */
+/* ==============================
+   ☎️ Phone Input with Code
+   ============================== */
 .phone-input-wrapper {
   position: relative;
   width: 100%;
@@ -454,11 +320,11 @@ button[type="submit"]:hover {
 
 .country-code-badge {
   position: absolute;
-  left: 10px; /* تغيير من right إلى left */
+  left: 10px;
   top: 50%;
   transform: translateY(-50%);
-  background: #4CAF50;
-  color: white;
+  background: var(--primary-color);
+  color: var(--text-light);
   padding: 4px 8px;
   border-radius: 4px;
   font-size: 12px;
@@ -467,7 +333,153 @@ button[type="submit"]:hover {
 }
 
 .phone-input-wrapper input {
-  padding-left: 70px; /* تغيير من padding-right إلى padding-left */
+  padding-left: 70px;
   width: 100%;
   box-sizing: border-box;
+}
+
+/* ==============================
+   📱 Responsive Design
+   ============================== */
+@media screen and (max-width: 768px) {
+  #navbar ul {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .nav-left,
+  .nav-right {
+    margin: 0;
+    width: 100%;
+    justify-content: center;
+  }
+
+  #navbar li {
+    padding: 8px 0;
+    text-align: center;
+  }
+
+  #navbar a {
+    padding: 8px 15px;
+    font-size: 16px;
+  }
+
+  #home {
+    padding: 30px 20px;
+  }
+
+  .modal-content {
+    width: 90%;
+    margin: 10% auto;
+    padding: 15px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  #navbar a {
+    padding: 10px;
+    font-size: 14px;
+    text-align: center;
+  }
+
+  #home {
+    padding: 20px 10px;
+  }
+
+  #home h1 {
+    font-size: 24px;
+  }
+
+  .modal-content {
+    width: 95%;
+    margin: 5% auto;
+    padding: 10px;
+  }
+
+  .form-group {
+    margin-bottom: 10px;
+  }
+
+  input {
+    padding: 8px;
+    font-size: 14px;
+  }
+
+  button[type="submit"] {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+
+  .avatar-preview {
+    width: 100px;
+    height: 100px;
+  }
+}
+
+
+/* ==============================
+   📜 Terms & Privacy Section
+   ============================== */
+#terms-section {
+  background-color: var(--bg-secondary);
+  color: var(--text-color);
+  padding: 50px 20px;
+  border-top: 1px solid var(--bg-tertiary);
+  transition: var(--transition);
+}
+
+.terms-container {
+  max-width: 900px;
+  margin: auto;
+  background-color: var(--bg-color);
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  text-align: right;
+  line-height: 1.8;
+  transition: var(--transition);
+}
+
+.terms-container h2,
+.terms-container h3 {
+  color: var(--primary-color);
+  margin-bottom: 15px;
+}
+
+.terms-container p {
+  color: var(--text-color);
+  margin-bottom: 15px;
+  font-size: 16px;
+}
+
+.terms-container ul {
+  list-style-type: disc;
+  padding-right: 25px;
+  margin-bottom: 20px;
+}
+
+.terms-container li {
+  margin-bottom: 10px;
+}
+
+.terms-actions {
+  text-align: center;
+  margin-top: 30px;
+}
+
+
+/* Responsive */
+@media screen and (max-width: 768px) {
+  .terms-container {
+    padding: 20px;
+  }
+
+  .terms-container h2 {
+    font-size: 22px;
+  }
+
+  .terms-container p, .terms-container li {
+    font-size: 14px;
+  }
+
 }
