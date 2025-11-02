@@ -26,7 +26,6 @@ export function showWalletDialog() {
                             font-family: inherit;
                         "
                         autocomplete="off"
-                        oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 11)"
                     />
                     <small style="color: #666; display: block; margin-top: 5px; font-size: 0.85rem;">
                         سيتم استخدام هذا الرقم لإتمام عملية الدفع
@@ -39,8 +38,15 @@ export function showWalletDialog() {
             html: true
         });
 
+        // بعد عرض الحوار، نضيف المستمع
         if (confirmed) {
             const walletInput = document.getElementById('walletInput');
+            if (walletInput) {
+                walletInput.addEventListener('input', (e) => {
+                    e.target.value = e.target.value.replace(/[^0-9]/g, '').slice(0, 11);
+                });
+            }
+
             const number = walletInput ? walletInput.value.trim() : '';
 
             if (!number) {
