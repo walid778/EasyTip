@@ -15,7 +15,7 @@ export function showWalletDialog() {
                         id="walletInput" 
                         placeholder="أدخل رقم المحفظة هنا..." 
                         value="${savedWalletNumber}"
-                        maxlength="11"
+                        min="11" step="0.01"
                         style="
                             width: 100%;
                             padding: 12px;
