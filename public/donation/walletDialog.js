@@ -3,17 +3,15 @@ import { showDialog, showAlert } from '../js/dialog/dialog.js';
 export function showWalletDialog() {
     return new Promise(async (resolve) => {
         const savedWalletNumber = localStorage.getItem('walletNumber') || '';
-
-        // عرض الـ Dialog
         const confirmed = await showDialog({
             title: '📱 رقم المحفظة',
             message: `
                 <div style="text-align: center; padding: 10px 0;">
                     <h4 style="margin-bottom: 15px; color: #04c20e; font-size: 1.1rem;">أدخل رقم المحفظة</h4>
-                    <input 
-                        type="text" 
-                        id="walletInput" 
-                        placeholder="أدخل رقم المحفظة هنا..." 
+                    <input
+                        type="text"
+                        id="walletInput"
+                        placeholder="أدخل رقم المحفظة هنا..."
                         value="${savedWalletNumber}"
                         maxlength="11"
                         style="
@@ -28,6 +26,7 @@ export function showWalletDialog() {
                             font-family: inherit;
                         "
                         autocomplete="off"
+                        oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 11)"
                     />
                     <small style="color: #666; display: block; margin-top: 5px; font-size: 0.85rem;">
                         سيتم استخدام هذا الرقم لإتمام عملية الدفع
@@ -40,19 +39,10 @@ export function showWalletDialog() {
             html: true
         });
 
-        const walletInput = document.getElementById('walletInput');
-
-        // فلترة فورية للأرقام فقط ومنع تجاوز 11 رقم
-        if (walletInput) {
-            walletInput.addEventListener('input', (e) => {
-                e.target.value = e.target.value.replace(/[^0-9]/g, '').slice(0, 11);
-            });
-        }
-
         if (confirmed) {
+            const walletInput = document.getElementById('walletInput');
             const number = walletInput ? walletInput.value.trim() : '';
 
-            // التحقق من إدخال الرقم
             if (!number) {
                 await showAlert({
                     title: '⚠️ تنبيه',
@@ -63,7 +53,6 @@ export function showWalletDialog() {
                 return;
             }
 
-            // التحقق من طول الرقم
             if (number.length < 10 || number.length > 11) {
                 await showAlert({
                     title: '⚠️ خطأ',
@@ -74,7 +63,6 @@ export function showWalletDialog() {
                 return;
             }
 
-            // التحقق من أن الرقم يبدأ بـ 01
             if (!number.startsWith('01')) {
                 await showAlert({
                     title: '⚠️ خطأ في الرقم',
@@ -85,7 +73,6 @@ export function showWalletDialog() {
                 return;
             }
 
-            // حفظ الرقم إذا كان صحيح
             localStorage.setItem('walletNumber', number);
             resolve(number);
         } else {
@@ -93,6 +80,7 @@ export function showWalletDialog() {
         }
     });
 }
+
 
 export function loadSavedWalletNumber() {
     return localStorage.getItem('walletNumber') || '';
