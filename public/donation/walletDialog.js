@@ -2,10 +2,9 @@ import { showDialog, showAlert } from '../js/dialog/dialog.js';
 
 export function showWalletDialog() {
     return new Promise(async (resolve) => {
-        // جلب الرقم المحفوظ مسبقاً من localStorage
         const savedWalletNumber = localStorage.getItem('walletNumber') || '';
-        
-        // عرض الـ dialog
+
+        // عرض الـ Dialog
         const confirmed = await showDialog({
             title: '📱 رقم المحفظة',
             message: `
@@ -41,16 +40,18 @@ export function showWalletDialog() {
             html: true
         });
 
-        if (confirmed) {
-            const walletInput = document.getElementById('walletInput');
-            const number = walletInput ? walletInput.value.trim() : '';
-
-            // 🛡️ منع إدخال الحروف أثناء الكتابة
+        // إضافة فلترة فورية للأرقام فقط
+        const walletInput = document.getElementById('walletInput');
+        if (walletInput) {
             walletInput.addEventListener('input', (e) => {
                 e.target.value = e.target.value.replace(/[^0-9]/g, '');
             });
+        }
 
-            // ✅ تحقق من الرقم قبل الحفظ
+        if (confirmed) {
+            const number = walletInput ? walletInput.value.trim() : '';
+
+            // ✅ تحقق من إدخال الرقم
             if (!number) {
                 await showAlert({
                     title: '⚠️ تنبيه',
@@ -61,10 +62,22 @@ export function showWalletDialog() {
                 return;
             }
 
+            // ✅ التحقق من طول الرقم
             if (number.length < 10 || number.length > 11) {
                 await showAlert({
                     title: '⚠️ خطأ',
                     message: 'رقم المحفظة يجب أن يكون مكونًا من 10 إلى 11 رقمًا فقط',
+                    buttonText: 'حسناً'
+                });
+                resolve(null);
+                return;
+            }
+
+            // ✅ التحقق من أن الرقم يبدأ بـ 01 (زي أرقام المحمول المصرية)
+            if (!number.startsWith('01')) {
+                await showAlert({
+                    title: '⚠️ خطأ في الرقم',
+                    message: 'رقم المحفظة يجب أن يبدأ بـ 01 (مثل 010 أو 011 أو 012 أو 015)',
                     buttonText: 'حسناً'
                 });
                 resolve(null);
@@ -81,8 +94,7 @@ export function showWalletDialog() {
 }
 
 export function loadSavedWalletNumber() {
-    const savedWalletNumber = localStorage.getItem('walletNumber');
-    return savedWalletNumber || '';
+    return localStorage.getItem('walletNumber') || '';
 }
 
 export function clearWalletNumber() {

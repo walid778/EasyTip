@@ -1,17 +1,32 @@
-/* القاعدة العامة */
+:root {
+  --primary-color: #4a90e2;
+  --secondary-color: #f5f5f5;
+  --bg-color: #1e1e2f;
+  --bg-secondary: #2a2a3c;
+  --bg-tertiary: #33334d;
+  --text-color: #f5f5f5;
+  --text-light: #fff;
+  --danger-color: #e74c3c;
+  --success-color: #2ecc71;
+  --transition: 0.3s;
+  --border-color: rgba(255, 255, 255, 0.1);
+  --box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  --border-radius: 12px;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  transition: var(--transition);
 }
 
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Segoe UI', 'Cairo', Tahoma, Geneva, Verdana, sans-serif;
   padding: 15px;
   direction: rtl;
-  background: linear-gradient(135deg, #f9f9f9 0%, #e8f4f8 100%);
-  margin: 0;
-  color: #333;
+  background-color: var(--bg-color);
+  color: var(--text-color);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -20,7 +35,7 @@ body {
 }
 
 .error-message {
-  color: #d9534f;
+  color: var(--danger-color);
   font-size: 0.8rem;
   margin-top: 4px;
   display: block;
@@ -29,13 +44,11 @@ body {
   width: 100%;
 }
 
-h1 {
+h1, h2, h3 {
   text-align: center;
   margin-bottom: 20px;
   font-weight: 700;
-  color: #04c20e;
-  font-size: 1.8rem;
-  text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  color: var(--primary-color);
 }
 
 .payment-methods {
@@ -49,9 +62,9 @@ h1 {
 .method {
   cursor: pointer;
   user-select: none;
-  background: #fff;
-  border: 2px solid #e0e0e0;
-  border-radius: 12px;
+  background: var(--bg-secondary);
+  border: 2px solid var(--border-color);
+  border-radius: var(--border-radius);
   padding: 12px 15px;
   width: 100%;
   display: flex;
@@ -61,9 +74,9 @@ h1 {
   text-align: right;
   font-weight: 600;
   font-size: 1rem;
-  color: #222;
+  color: var(--text-color);
   transition: all 0.3s ease;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   position: relative;
   overflow: hidden;
 }
@@ -75,7 +88,7 @@ h1 {
   right: 0;
   width: 4px;
   height: 100%;
-  background: #04c20e;
+  background: var(--primary-color);
   transform: scaleY(0);
   transition: transform 0.3s ease;
 }
@@ -94,8 +107,8 @@ h1 {
 }
 
 .method:hover {
-  border-color: #04c20e;
-  box-shadow: 0 4px 15px rgba(4, 194, 14, 0.15);
+  border-color: var(--primary-color);
+  box-shadow: 0 4px 15px rgba(74, 144, 226, 0.2);
   transform: translateY(-2px);
 }
 
@@ -108,16 +121,16 @@ h1 {
 }
 
 .method.selected {
-  border-color: #04c20e;
-  box-shadow: 0 4px 16px rgba(4, 194, 14, 0.2);
-  background: linear-gradient(135deg, #f0fff0 0%, #e6f7ff 100%);
+  border-color: var(--primary-color);
+  box-shadow: 0 4px 16px rgba(74, 144, 226, 0.3);
+  background: rgba(74, 144, 226, 0.1);
 }
 
 .method.selected::before {
   transform: scaleY(1);
 }
 
-input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
@@ -126,12 +139,6 @@ input[type=number]::-webkit-outer-spin-button {
 input[type=number] {
   -moz-appearance: textfield;
   appearance: textfield;
-}
-/* لإخفاء الأسهم في متصفحات WebKit (Chrome, Safari, Edge) */
-input[type=number]::-webkit-outer-spin-button,
-input[type=number]::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
 }
 
 .amount-options {
@@ -142,7 +149,6 @@ input[type=number]::-webkit-inner-spin-button {
   width: 100%;
   margin-bottom: 20px;
   padding-bottom: 5px;
-  -webkit-overflow-scrolling: touch;
 }
 
 .amount-options::-webkit-scrollbar {
@@ -150,15 +156,15 @@ input[type=number]::-webkit-inner-spin-button {
 }
 
 .amount-options::-webkit-scrollbar-thumb {
-  background: #04c20e;
+  background: var(--primary-color);
   border-radius: 2px;
 }
 
 .amount-box {
   cursor: pointer;
   user-select: none;
-  background: #fff;
-  border: 2px solid #e0e0e0;
+  background: var(--bg-secondary);
+  border: 2px solid var(--border-color);
   border-radius: 10px;
   width: 60px;
   height: 60px;
@@ -167,9 +173,9 @@ input[type=number]::-webkit-inner-spin-button {
   justify-content: center;
   font-weight: 600;
   font-size: 0.9rem;
-  color: #222;
+  color: var(--text-color);
   transition: all 0.3s ease;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   position: relative;
   overflow: hidden;
   flex-shrink: 0;
@@ -182,14 +188,14 @@ input[type=number]::-webkit-inner-spin-button {
   right: 0;
   width: 4px;
   height: 100%;
-  background: #04c20e;
+  background: var(--primary-color);
   transform: scaleY(0);
   transition: transform 0.3s ease;
 }
 
 .amount-box:hover {
-  border-color: #04c20e;
-  box-shadow: 0 4px 12px rgba(4, 194, 14, 0.15);
+  border-color: var(--primary-color);
+  box-shadow: 0 4px 12px rgba(74, 144, 226, 0.2);
   transform: translateY(-2px);
 }
 
@@ -198,9 +204,9 @@ input[type=number]::-webkit-inner-spin-button {
 }
 
 .amount-box.selected {
-  border-color: #04c20e;
-  box-shadow: 0 4px 12px rgba(4, 194, 14, 0.2);
-  background: linear-gradient(135deg, #f0fff0 0%, #e6f7ff 100%);
+  border-color: var(--primary-color);
+  box-shadow: 0 4px 12px rgba(74, 144, 226, 0.2);
+  background: rgba(74, 144, 226, 0.1);
 }
 
 .amount-box.selected::before {
@@ -223,7 +229,7 @@ input[type=number]::-webkit-inner-spin-button {
   left: 15px;
   transform: translateY(-50%);
   font-size: 1.1rem;
-  color: #04c20e;
+  color: var(--primary-color);
   pointer-events: none;
   user-select: none;
   font-weight: bold;
@@ -232,19 +238,19 @@ input[type=number]::-webkit-inner-spin-button {
 form {
   width: 100%;
   max-width: 500px;
-  background: #fff;
+  background: var(--bg-secondary);
   padding: 20px;
-  border-radius: 16px;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
   margin-bottom: 20px;
-  border: 1px solid #f0f0f0;
+  border: 1px solid var(--border-color);
 }
 
 form h2 {
   margin-bottom: 20px;
   font-weight: 700;
   font-size: 1.3rem;
-  color: #04c20e;
+  color: var(--primary-color);
   text-align: center;
   position: relative;
 }
@@ -257,7 +263,7 @@ form h2::after {
   transform: translateX(50%);
   width: 50px;
   height: 3px;
-  background: linear-gradient(90deg, #04c20e, #00a2ff);
+  background: linear-gradient(90deg, var(--primary-color), #00a2ff);
   border-radius: 2px;
 }
 
@@ -265,7 +271,7 @@ label {
   display: block;
   margin-top: 15px;
   font-weight: 600;
-  color: #444;
+  color: var(--text-color);
   user-select: none;
   font-size: 0.95rem;
 }
@@ -280,10 +286,11 @@ select {
   padding: 12px;
   margin-top: 6px;
   border-radius: 10px;
-  border: 2px solid #e0e0e0;
+  border: 2px solid var(--border-color);
   font-size: 1rem;
   transition: all 0.3s ease;
-  background: #fafafa;
+  background: var(--bg-secondary);
+  color: var(--text-color);
   text-align: right;
 }
 
@@ -293,10 +300,10 @@ input[type="tel"]:focus,
 input[type="url"]:focus,
 input[type="number"]:focus,
 select:focus {
-  border-color: #04c20e;
+  border-color: var(--primary-color);
   outline: none;
-  box-shadow: 0 0 0 3px rgba(4, 194, 14, 0.1);
-  background: #fff;
+  box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2);
+  background: rgba(74, 144, 226, 0.05);
   transform: translateY(-1px);
 }
 
@@ -312,7 +319,7 @@ select:focus {
 .currency-choice label {
   cursor: pointer;
   font-weight: 600;
-  color: #333;
+  color: var(--text-color);
   display: flex;
   align-items: center;
   gap: 6px;
@@ -325,29 +332,29 @@ select:focus {
 }
 
 .currency-choice label:hover {
-  background: #f5f5f5;
+  background: rgba(74, 144, 226, 0.1);
 }
 
 .currency-choice input[type="radio"] {
   cursor: pointer;
   width: 18px;
   height: 18px;
-  accent-color: #04c20e;
+  accent-color: var(--primary-color);
 }
 
 button {
   width: 100%;
   padding: 14px;
   margin-top: 20px;
-  background: linear-gradient(135deg, #04c20e 0%, #00a2ff 100%);
-  color: white;
+  background: var(--primary-color);
+  color: var(--text-light);
   border: none;
   cursor: pointer;
   border-radius: 10px;
   font-size: 1.1rem;
   font-weight: 700;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(4, 194, 14, 0.3);
+  box-shadow: 0 4px 15px rgba(74, 144, 226, 0.3);
   position: relative;
   overflow: hidden;
 }
@@ -359,13 +366,13 @@ button::before {
   right: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
   transition: right 0.5s;
 }
 
 button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(4, 194, 14, 0.4);
+  box-shadow: 0 6px 20px rgba(74, 144, 226, 0.4);
 }
 
 button:hover::before {
@@ -381,7 +388,7 @@ button:active {
   max-width: 500px;
   margin: 15px 0;
   padding: 15px;
-  border-radius: 10px;
+  border-radius: var(--border-radius);
   font-weight: 600;
   font-size: 1rem;
   word-break: break-word;
@@ -402,30 +409,30 @@ button:active {
 }
 
 .result.success {
-  background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
-  color: #155724;
-  border: 2px solid #28a745;
+  background: rgba(46, 204, 113, 0.1);
+  color: var(--success-color);
+  border: 2px solid var(--success-color);
 }
 
 .result.error {
-  background: linear-gradient(135deg, #f8d7da 0%, #f5c6cb 100%);
-  color: #721c24;
-  border: 2px solid #dc3545;
+  background: rgba(231, 76, 60, 0.1);
+  color: var(--danger-color);
+  border: 2px solid var(--danger-color);
 }
 
 .profile-box {
-  background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
+  background: var(--bg-secondary);
   width: 100%;
   max-width: 500px;
-  border-radius: 16px;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
   padding: 20px;
   margin-bottom: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
   user-select: none;
-  border: 1px solid #f0f0f0;
+  border: 1px solid var(--border-color);
   text-align: center;
 }
 
@@ -435,71 +442,71 @@ button:active {
   border-radius: 50%;
   object-fit: cover;
   margin-bottom: 12px;
-  border: 3px solid #04c20e;
-  box-shadow: 0 4px 12px rgba(4, 194, 14, 0.3);
+  border: 3px solid var(--primary-color);
+  box-shadow: 0 4px 12px rgba(74, 144, 226, 0.3);
 }
 
 .profile-box .name {
   font-weight: 700;
   font-size: 1.2rem;
-  color: #04c20e;
+  color: var(--primary-color);
   margin-bottom: 6px;
 }
 
 .profile-box .tiktok-id {
   font-weight: 600;
   font-size: 1rem;
-  color: #666;
-  background: #f8f9fa;
+  color: var(--text-color);
+  background: rgba(74, 144, 226, 0.1);
   padding: 5px 10px;
   border-radius: 15px;
 }
 
-/* تحسينات للأجهزة الصغيرة جداً */
+/* تحسينات للأجهزة الصغيرة */
 @media screen and (max-width: 320px) {
   body {
     padding: 10px;
   }
-  
+
   form {
     padding: 15px;
   }
-  
+
   .method {
     padding: 10px 12px;
     font-size: 0.9rem;
   }
-  
+
   .method img {
     width: 30px;
     height: 30px;
   }
-  
+
   .amount-box {
     width: 55px;
     height: 55px;
     font-size: 0.85rem;
   }
-  
+
   .currency-choice {
     gap: 10px;
   }
-  
+
   .currency-choice label {
     font-size: 0.9rem;
     padding: 6px 10px;
   }
-  
+
   button {
     font-size: 1rem;
     padding: 12px;
   }
-  
+
   .profile-box img.avatar {
     width: 70px;
     height: 70px;
   }
-  
+
   .profile-box .name {
     font-size: 1.1rem;
   }
@@ -510,34 +517,34 @@ button:active {
   body {
     padding: 20px;
   }
-  
+
   form {
     padding: 25px;
   }
-  
+
   .method {
     padding: 15px 20px;
   }
-  
+
   .method img {
     width: 40px;
     height: 40px;
   }
-  
+
   .amount-box {
     width: 70px;
     height: 70px;
     font-size: 1rem;
   }
-  
+
   button {
     padding: 16px;
   }
-  
+
   .profile-box {
     padding: 25px;
   }
-  
+
   .profile-box img.avatar {
     width: 100px;
     height: 100px;
@@ -549,7 +556,7 @@ button:active {
   body {
     padding: 30px;
   }
-  
+
   form {
     padding: 30px;
   }
@@ -562,24 +569,24 @@ button:active {
   button {
     min-height: 44px;
   }
-  
+
   .method:hover,
   .amount-box:hover {
     transform: none;
   }
-  
+
   .method:active,
   .amount-box:active {
     transform: translateY(-2px);
   }
-  
+
   input[type="text"],
   input[type="email"],
   input[type="tel"],
   input[type="url"],
   input[type="number"],
   select {
-    font-size: 16px; /* منع التكبير في iOS */
+    font-size: 16px;
   }
 }
 
@@ -588,7 +595,7 @@ button:active {
   body {
     justify-content: center;
   }
-  
+
   form, .profile-box, .result {
     max-width: 450px;
   }
@@ -600,17 +607,17 @@ button:active {
     padding: 10px;
     justify-content: flex-start;
   }
-  
+
   .profile-box {
     padding: 15px;
     margin-bottom: 15px;
   }
-  
+
   .profile-box img.avatar {
     width: 60px;
     height: 60px;
   }
-  
+
   form {
     padding: 15px;
     margin-bottom: 15px;
@@ -624,23 +631,4 @@ button:active {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
-}
-
-/* تحسينات النصوص العربية */
-body {
-  font-family: 'Segoe UI', 'Cairo', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-input[type="text"],
-input[type="email"],
-input[type="tel"],
-input[type="url"],
-input[type="number"],
-select,
-button {
-  font-family: 'Segoe UI', 'Cairo', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-.amount-box, .method {
-  font-family: 'Segoe UI', 'Cairo', Tahoma, Geneva, Verdana, sans-serif;
 }
