@@ -3,17 +3,15 @@ import { showDialog, showAlert } from '../js/dialog/dialog.js';
 export function showWalletDialog() {
     return new Promise(async (resolve) => {
         const savedWalletNumber = localStorage.getItem('walletNumber') || '';
-
-        // عرض الـ Dialog
         const confirmed = await showDialog({
             title: '📱 رقم المحفظة',
             message: `
                 <div style="text-align: center; padding: 10px 0;">
                     <h4 style="margin-bottom: 15px; color: #04c20e; font-size: 1.1rem;">أدخل رقم المحفظة</h4>
-                    <input 
-                        type="text" 
-                        id="walletInput" 
-                        placeholder="أدخل رقم المحفظة هنا..." 
+                    <input
+                        type="text"
+                        id="walletInput"
+                        placeholder="أدخل رقم المحفظة هنا..."
                         value="${savedWalletNumber}"
                         maxlength="11"
                         style="
@@ -37,7 +35,19 @@ export function showWalletDialog() {
             confirmText: 'تأكيد',
             cancelText: 'إلغاء',
             type: 'info',
-            html: true
+            html: true,
+            // إضافة ستايل مخصص للأزرار
+            buttonStyles: `
+                .dialog-cancel {
+                    background-color: var(--bg-secondary) !important;
+                    color: var(--text-color) !important;
+                    border: 1px solid var(--border-color) !important;
+                }
+                .dialog-cancel:hover {
+                    background-color: var(--bg-tertiary) !important;
+                    color: var(--text-color) !important;
+                }
+            `
         });
 
         // إضافة فلترة فورية للأرقام فقط
@@ -50,8 +60,6 @@ export function showWalletDialog() {
 
         if (confirmed) {
             const number = walletInput ? walletInput.value.trim() : '';
-
-            // ✅ تحقق من إدخال الرقم
             if (!number) {
                 await showAlert({
                     title: '⚠️ تنبيه',
@@ -61,8 +69,6 @@ export function showWalletDialog() {
                 resolve(null);
                 return;
             }
-
-            // ✅ التحقق من طول الرقم
             if (number.length < 10 || number.length > 11) {
                 await showAlert({
                     title: '⚠️ خطأ',
@@ -72,8 +78,6 @@ export function showWalletDialog() {
                 resolve(null);
                 return;
             }
-
-            // ✅ التحقق من أن الرقم يبدأ بـ 01 (زي أرقام المحمول المصرية)
             if (!number.startsWith('01')) {
                 await showAlert({
                     title: '⚠️ خطأ في الرقم',
@@ -83,8 +87,6 @@ export function showWalletDialog() {
                 resolve(null);
                 return;
             }
-
-            // 💾 حفظ الرقم إذا كان صحيح
             localStorage.setItem('walletNumber', number);
             resolve(number);
         } else {
@@ -92,6 +94,7 @@ export function showWalletDialog() {
         }
     });
 }
+
 
 export function loadSavedWalletNumber() {
     return localStorage.getItem('walletNumber') || '';
