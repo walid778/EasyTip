@@ -2,6 +2,7 @@ import { getCurrentUser, logout, isAuthenticated, getHeaders  } from '../js/auth
 import { showToast } from '../js/toast.js';
 import { setupAmountsSection } from './amountsSection.js';
 import { setupSettingsSection } from './settingsSection.js';
+import {API} from '../config/apiconfig.js';
 
 // دالة لإعداد القائمة الموبايل
 function setupMobileMenu() {
@@ -123,6 +124,8 @@ async function initDashboard() {
     // عرض بيانات المستخدم في header
     displayHeaderData(user);
 
+    updateDonationURL(user);
+
   } catch (err) {
     console.error(err);
     showToast('حدث خطأ أثناء تحميل البيانات', 'error');
@@ -152,6 +155,30 @@ function displayHeaderData(user) {
   } else if (userAvatarEl) {
     userAvatarEl.style.display = 'none';
   }
+}
+
+// دالة لتحديث وعرض رابط التبرع
+function updateDonationURL(user) {
+  const urlElement = document.getElementById('overlay-url');
+  const copyBtn = document.getElementById('copy-url-btn');
+
+  if (!urlElement || !copyBtn) return;
+
+  // 1. تحديث الرابط بالنص الفعلي
+  const donationURL = `${API.DONATION_LINK.GET}/${user.tiktokuser}`;
+  urlElement.textContent = donationURL;
+
+  // 2. إعداد وظيفة النسخ
+  copyBtn.addEventListener('click', () => {
+    navigator.clipboard.writeText(donationURL)
+      .then(() => {
+        showToast('✅ تم نسخ الرابط بنجاح', 'success');
+      })
+      .catch(err => {
+        console.error('Failed to copy text: ', err);
+        showToast('❌ فشل في نسخ الرابط', 'error');
+      });
+  });
 }
 
 document.addEventListener('DOMContentLoaded', initDashboard);
