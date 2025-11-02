@@ -11,11 +11,11 @@ export function showWalletDialog() {
                 <div style="text-align: center; padding: 10px 0;">
                     <h4 style="margin-bottom: 15px; color: #04c20e; font-size: 1.1rem;">أدخل رقم المحفظة</h4>
                     <input 
-                        type="number" 
+                        type="text" 
                         id="walletInput" 
                         placeholder="أدخل رقم المحفظة هنا..." 
                         value="${savedWalletNumber}"
-                        min="11" step="0.01"
+                        maxlength="11"
                         style="
                             width: 100%;
                             padding: 12px;
@@ -40,18 +40,19 @@ export function showWalletDialog() {
             html: true
         });
 
-        // إضافة فلترة فورية للأرقام فقط
         const walletInput = document.getElementById('walletInput');
+
+        // فلترة فورية للأرقام فقط ومنع تجاوز 11 رقم
         if (walletInput) {
             walletInput.addEventListener('input', (e) => {
-                e.target.value = e.target.value.replace(/[^0-9]/g, '');
+                e.target.value = e.target.value.replace(/[^0-9]/g, '').slice(0, 11);
             });
         }
 
         if (confirmed) {
             const number = walletInput ? walletInput.value.trim() : '';
 
-            // ✅ تحقق من إدخال الرقم
+            // التحقق من إدخال الرقم
             if (!number) {
                 await showAlert({
                     title: '⚠️ تنبيه',
@@ -62,7 +63,7 @@ export function showWalletDialog() {
                 return;
             }
 
-            // ✅ التحقق من طول الرقم
+            // التحقق من طول الرقم
             if (number.length < 10 || number.length > 11) {
                 await showAlert({
                     title: '⚠️ خطأ',
@@ -73,7 +74,7 @@ export function showWalletDialog() {
                 return;
             }
 
-            // ✅ التحقق من أن الرقم يبدأ بـ 01 (زي أرقام المحمول المصرية)
+            // التحقق من أن الرقم يبدأ بـ 01
             if (!number.startsWith('01')) {
                 await showAlert({
                     title: '⚠️ خطأ في الرقم',
@@ -84,7 +85,7 @@ export function showWalletDialog() {
                 return;
             }
 
-            // 💾 حفظ الرقم إذا كان صحيح
+            // حفظ الرقم إذا كان صحيح
             localStorage.setItem('walletNumber', number);
             resolve(number);
         } else {
