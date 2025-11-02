@@ -5,7 +5,7 @@ export function showWalletDialog() {
         // جلب الرقم المحفوظ مسبقاً من localStorage
         const savedWalletNumber = localStorage.getItem('walletNumber') || '';
         
-        // استخدام الـ dialog الموجود مع تفعيل الـ HTML
+        // عرض الـ dialog
         const confirmed = await showDialog({
             title: '📱 رقم المحفظة',
             message: `
@@ -16,6 +16,7 @@ export function showWalletDialog() {
                         id="walletInput" 
                         placeholder="أدخل رقم المحفظة هنا..." 
                         value="${savedWalletNumber}"
+                        maxlength="11"
                         style="
                             width: 100%;
                             padding: 12px;
@@ -43,19 +44,36 @@ export function showWalletDialog() {
         if (confirmed) {
             const walletInput = document.getElementById('walletInput');
             const number = walletInput ? walletInput.value.trim() : '';
-            
-            if (number) {
-                // حفظ الرقم في localStorage
-                localStorage.setItem('walletNumber', number);
-                resolve(number);
-            } else {
+
+            // 🛡️ منع إدخال الحروف أثناء الكتابة
+            walletInput.addEventListener('input', (e) => {
+                e.target.value = e.target.value.replace(/[^0-9]/g, '');
+            });
+
+            // ✅ تحقق من الرقم قبل الحفظ
+            if (!number) {
                 await showAlert({
                     title: '⚠️ تنبيه',
                     message: 'يرجى إدخال رقم المحفظة أولاً',
                     buttonText: 'حسناً'
                 });
                 resolve(null);
+                return;
             }
+
+            if (number.length < 10 || number.length > 11) {
+                await showAlert({
+                    title: '⚠️ خطأ',
+                    message: 'رقم المحفظة يجب أن يكون مكونًا من 10 إلى 11 رقمًا فقط',
+                    buttonText: 'حسناً'
+                });
+                resolve(null);
+                return;
+            }
+
+            // 💾 حفظ الرقم إذا كان صحيح
+            localStorage.setItem('walletNumber', number);
+            resolve(number);
         } else {
             resolve(null);
         }
@@ -64,11 +82,7 @@ export function showWalletDialog() {
 
 export function loadSavedWalletNumber() {
     const savedWalletNumber = localStorage.getItem('walletNumber');
-    if (savedWalletNumber) {
-        //console.log('تم تحميل رقم المحفظة المحفوظ:', savedWalletNumber);
-        return savedWalletNumber;
-    }
-    return '';
+    return savedWalletNumber || '';
 }
 
 export function clearWalletNumber() {

@@ -387,4 +387,18 @@ async function initializeApp() {
   }
 }
 
-document.addEventListener("DOMContentLoaded", initializeApp);
+// -------------------------
+// Phone Input Restriction + Init
+// -------------------------
+document.addEventListener("DOMContentLoaded", () => {
+  // منع إدخال الحروف في رقم الهاتف
+  const phoneInput = document.getElementById("signup-phone");
+  if (phoneInput) {
+    phoneInput.addEventListener("input", function (e) {
+      this.value = this.value.replace(/[^0-9]/g, "");
+    });
+  }
+
+  // تهيئة التطبيق
+  initializeApp();
+});
