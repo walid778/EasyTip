@@ -26,7 +26,7 @@ const verifyToken = (req, res, next) => {
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    
+    console.log('Decoded Token:', decoded);
     // تأكد من وجود البيانات الأساسية في التوكن
     if (!decoded.id || !decoded.email) {
       return res.status(403).json({ 
