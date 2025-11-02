@@ -77,7 +77,8 @@ export async function fetchWithAuth(url, options = {}) {
     }
 
     // إذا طلب السيرفر تحديث التوكن
-    if (data.requiresRefresh || response.status === 401) {
+    //if (data.requiresRefresh || response.status === 401) 
+      if (data.requiresRefresh || response.status === 401 || (response.status === 403 && data.message === 'Invalid token payload')) {
       console.log('Token requires refresh, attempting refresh...');
       
       if (!refreshToken) {
@@ -365,10 +366,9 @@ export async function deleteAllAmounts() {
 }
 
 // دالة لجلب CSRF Token من الخادم
-// دالة لجلب CSRF Token من الخادم
 export async function getCSRFToken() {
     try {
-        const response = await fetch('/api/csrf-token', {
+        const response = await fetch(API.CRF_TOKEN.GET, {
             credentials: 'include' // ⭐ مهم لإرسال cookies
         });
         

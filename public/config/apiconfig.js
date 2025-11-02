@@ -1,7 +1,7 @@
 // API Configuration File
 export class ApiConfig {
     constructor() {
-        this.BASE_URL = 'http://192.168.1.177:3000';
+        this.BASE_URL = 'https://easytip-production.up.railway.app';
         this.API_KEY = '227aca8bf6731507d99c882bb645264ed9ffe07372b1e7c3f4';
     }
 
@@ -45,6 +45,12 @@ export class ApiConfig {
     get PAYMENT_METHOD() {
         return {
             GET_BY_USER: `${this.BASE_URL}/api/payments/getPayment`,
+        };
+    }
+
+    get CRF_TOKEN() {
+        return {
+            GET: `${this.BASE_URL}/api/csrf-token`,
         };
     }
 }
